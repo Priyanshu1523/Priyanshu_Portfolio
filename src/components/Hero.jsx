@@ -114,12 +114,12 @@ export default function Hero({ ready }) {
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-5 w-full sm:w-auto"
           >
             <button
-              onClick={() => handleScrollClick('#works')}
+              onClick={() => handleScrollClick('#projects')}
               onMouseEnter={() => sounds.playHover()}
               className="w-full sm:w-auto px-7 py-4 rounded-full bg-[#0B3D2E] text-[#D6C29A] font-mono-code text-xs uppercase tracking-widest font-semibold border border-[#D6C29A]/40 hover:bg-[#D6C29A] hover:text-[#101110] transition-all duration-300 shadow-lg shadow-[#0B3D2E]/40 hover:shadow-[#D6C29A]/20 flex items-center justify-center gap-2.5 group"
               data-cursor="pointer"
             >
-              <span>Explore My Work</span>
+              <span>Explore Projects</span>
               <ArrowDown size={14} className="group-hover:translate-y-0.5 transition-transform" />
             </button>
 

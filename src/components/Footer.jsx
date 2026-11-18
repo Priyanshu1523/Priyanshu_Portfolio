@@ -10,10 +10,10 @@ export default function Footer() {
     scrollToSection('#hero');
   };
 
-  // Exact Page Order: About -> Works -> Services -> Tech Stack -> Experience -> Education -> Workflow -> Contact
+  // Exact Page Order: About -> Projects -> Services -> Tech Stack -> Experience -> Education -> Workflow -> Contact
   const navLinks = [
     { name: 'About', href: '#about' },
-    { name: 'Works', href: '#works' },
+    { name: 'Projects', href: '#projects' },
     { name: 'Services', href: '#services' },
     { name: 'Tech Stack', href: '#tech-stack' },
     { name: 'Experience', href: '#experience' },

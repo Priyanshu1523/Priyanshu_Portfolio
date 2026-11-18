@@ -24,7 +24,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="works" className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-12 bg-[#101110] text-[#F3F0E8] overflow-hidden">
+    <section id="projects" className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-12 bg-[#101110] text-[#F3F0E8] overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-1/3 -right-20 w-80 sm:w-96 h-80 sm:h-96 bg-[#0B3D2E]/25 rounded-full blur-[160px] pointer-events-none" />
 
@@ -46,7 +46,7 @@ export default function Projects() {
             transition={{ duration: 0.7 }}
           >
             <h2 className="font-editorial text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight text-[#F3F0E8] leading-[1.12]">
-              Selected Work &
+              Selected Projects &
               <br />
               <span className="font-display italic text-[#D6C29A] font-normal">Client Partnerships.</span>
             </h2>

@@ -9,10 +9,10 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
   const [activeSection, setActiveSection] = useState('hero');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Exact Chronological Page Order: About -> Works -> Services -> Experience -> Contact
+  // Exact Chronological Page Order: About -> Projects -> Services -> Experience -> Contact
   const navLinks = [
     { name: 'About', href: '#about', id: 'about' },
-    { name: 'Works', href: '#works', id: 'works' },
+    { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'Services', href: '#services', id: 'services' },
     { name: 'Experience', href: '#experience', id: 'experience' },
     { name: 'Contact', href: '#contact', id: 'contact' },
@@ -27,7 +27,7 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
       }
 
       // Track active section in exact page order
-      const sections = ['hero', 'about', 'works', 'services', 'tech-stack', 'experience', 'education', 'workflow', 'contact'];
+      const sections = ['hero', 'about', 'projects', 'services', 'tech-stack', 'experience', 'education', 'workflow', 'contact'];
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
