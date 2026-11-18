@@ -14,20 +14,36 @@ export function initSmoothScroll() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return null;
 
+  // On mobile touch devices, allow the native browser engine to handle touch scrolling
+  // This provides hardware-accelerated 120Hz ProMotion momentum scrolling with zero touch lag or freezing!
+  const isTouchDevice = 
+    window.matchMedia('(pointer: coarse)').matches || 
+    'ontouchstart' in window || 
+    navigator.maxTouchPoints > 0;
+
+  if (isTouchDevice) {
+    if (lenisInstance) {
+      lenisInstance.destroy();
+      lenisInstance = null;
+    }
+    return null;
+  }
+
   if (lenisInstance) {
     lenisInstance.destroy();
     if (rafId) cancelAnimationFrame(rafId);
   }
 
   lenisInstance = new Lenis({
-    lerp: 0.085, // Ultra-buttery inertia smooth scroll
+    lerp: 0.085, // Ultra-buttery inertia smooth scroll on desktop
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
     orientation: 'vertical',
     gestureOrientation: 'vertical',
     smoothWheel: true,
     wheelMultiplier: 1.0,
-    touchMultiplier: 1.5,
+    touchMultiplier: 1.0,
+    syncTouch: false,
     autoRaf: false,
   });
 
@@ -55,6 +71,7 @@ export function scrollToSection(targetId) {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
     });
   } else {
+    // Native smooth scroll for mobile & touch devices
     element.scrollIntoView({ behavior: 'smooth' });
   }
 }

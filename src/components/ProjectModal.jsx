@@ -8,6 +8,9 @@ export default function ProjectModal({ project, onClose }) {
   const [iframeError, setIframeError] = useState(false);
 
   useEffect(() => {
+    // Only lock scroll when project is actively opened
+    if (!project) return;
+
     const handleKeyDown = (e) => {
       if (e.key === 'Escape') {
         sounds.playClick();
@@ -15,13 +18,16 @@ export default function ProjectModal({ project, onClose }) {
       }
     };
     window.addEventListener('keydown', handleKeyDown);
+
+    // Prevent background scrolling while modal is open
+    const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = originalOverflow || 'unset';
     };
-  }, [onClose]);
+  }, [project, onClose]);
 
   if (!project) return null;
 

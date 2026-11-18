@@ -29,7 +29,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#101110] text-[#F3F0E8] overflow-x-hidden selection:bg-[#D6C29A] selection:text-[#101110]">
+    <div className="relative min-h-screen w-full max-w-full bg-[#101110] text-[#F3F0E8] selection:bg-[#D6C29A] selection:text-[#101110]">
       {/* Glinto Film Grain Texture Overlay */}
       <div className="grain-overlay" aria-hidden="true" />
 

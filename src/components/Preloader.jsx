@@ -38,7 +38,9 @@ export default function Preloader({ onComplete }) {
             y: '-100%',
             transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] }
           }}
-          className="fixed inset-0 z-[100000] flex flex-col justify-between p-8 md:p-14 bg-[#101110] text-[#F3F0E8] select-none"
+          className={`fixed inset-0 z-[100000] flex flex-col justify-between p-8 md:p-14 bg-[#101110] text-[#F3F0E8] select-none ${
+            isDone ? 'pointer-events-none' : ''
+          }`}
         >
           {/* Top Row: System Status & Brand */}
           <div className="flex items-center justify-between text-xs md:text-sm font-mono-code text-[#999B96] uppercase tracking-widest">
