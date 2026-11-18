@@ -52,26 +52,26 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.94, y: 20 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-4xl max-h-[90vh] bg-[#12291F] border border-[#D6C29A]/30 rounded-2xl shadow-2xl overflow-y-auto text-[#F3F0E8] z-10 flex flex-col"
+          className="relative w-full max-w-4xl max-h-[92vh] sm:max-h-[90vh] bg-[#12291F] border border-[#D6C29A]/30 rounded-2xl shadow-2xl overflow-y-auto overscroll-contain text-[#F3F0E8] z-10 flex flex-col"
         >
           {/* Header Bar */}
-          <div className="sticky top-0 bg-[#12291F]/95 backdrop-blur-md border-b border-[#D6C29A]/15 px-6 py-4 flex items-center justify-between z-20">
-            <div className="flex items-center gap-3">
-              <span className="font-mono-code text-xs px-3 py-1 rounded-full bg-[#0B3D2E] text-[#D6C29A] border border-[#D6C29A]/30 font-semibold flex items-center gap-1.5">
-                <Clock size={12} />
+          <div className="sticky top-0 bg-[#12291F]/95 backdrop-blur-md border-b border-[#D6C29A]/15 px-3.5 sm:px-6 py-3 sm:py-4 flex items-center justify-between z-20 gap-2">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+              <span className="font-mono-code text-[11px] sm:text-xs px-2.5 sm:px-3 py-1 rounded-full bg-[#0B3D2E] text-[#D6C29A] border border-[#D6C29A]/30 font-semibold flex items-center gap-1.5">
+                <Clock size={12} className="shrink-0" />
                 {project.duration}
               </span>
-              <span className="text-xs font-mono-code text-[#999B96] hidden sm:inline">
+              <span className="text-xs font-mono-code text-[#999B96] hidden md:inline">
                 PROJECT DOSSIER
               </span>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {/* Tab Selector: Overview vs Live Embed */}
-              <div className="flex items-center bg-[#101110] p-1 rounded-lg border border-[#D6C29A]/20 text-xs font-mono-code">
+              <div className="flex items-center bg-[#101110] p-1 rounded-lg border border-[#D6C29A]/20 text-[11px] sm:text-xs font-mono-code">
                 <button
                   onClick={() => setActiveTab('overview')}
-                  className={`px-3 py-1 rounded transition-colors ${
+                  className={`px-2.5 sm:px-3 py-1 rounded transition-colors ${
                     activeTab === 'overview'
                       ? 'bg-[#0B3D2E] text-[#D6C29A] font-semibold'
                       : 'text-[#999B96] hover:text-[#F3F0E8]'
@@ -81,14 +81,15 @@ export default function ProjectModal({ project, onClose }) {
                 </button>
                 <button
                   onClick={() => setActiveTab('preview')}
-                  className={`px-3 py-1 rounded transition-colors flex items-center gap-1 ${
+                  className={`px-2.5 sm:px-3 py-1 rounded transition-colors flex items-center gap-1 ${
                     activeTab === 'preview'
                       ? 'bg-[#0B3D2E] text-[#D6C29A] font-semibold'
                       : 'text-[#999B96] hover:text-[#F3F0E8]'
                   }`}
                 >
-                  <Laptop size={12} />
-                  <span>Interactive Frame</span>
+                  <Laptop size={12} className="shrink-0" />
+                  <span className="hidden xs:inline">Interactive Frame</span>
+                  <span className="xs:hidden">Live</span>
                 </button>
               </div>
 
@@ -98,7 +99,7 @@ export default function ProjectModal({ project, onClose }) {
                   sounds.playClick();
                   onClose();
                 }}
-                className="p-2 rounded-full bg-[#101110] text-[#999B96] hover:text-[#D6C29A] hover:bg-[#0B3D2E] transition-colors"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#101110] text-[#999B96] hover:text-[#D6C29A] hover:bg-[#0B3D2E] transition-colors flex items-center justify-center shrink-0"
                 aria-label="Close Modal"
                 data-cursor="pointer"
               >
@@ -108,17 +109,17 @@ export default function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Modal Content */}
-          <div className="p-6 md:p-10 space-y-8">
+          <div className="p-4 sm:p-6 md:p-10 space-y-6 sm:space-y-8">
             {/* Live Interactive Embed or Mockup Banner */}
             {activeTab === 'preview' ? (
               <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden border border-[#D6C29A]/30 bg-[#101110]">
                 {iframeError ? (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-[#07241B]">
-                    <Lock size={32} className="text-[#D6C29A] mb-3" />
-                    <h4 className="font-editorial text-xl font-bold text-[#F3F0E8] mb-2">
+                  <div className="w-full h-full flex flex-col items-center justify-center p-6 sm:p-8 text-center bg-[#07241B]">
+                    <Lock size={28} className="text-[#D6C29A] mb-3" />
+                    <h4 className="font-editorial text-lg sm:text-xl font-bold text-[#F3F0E8] mb-2">
                       External Embedding Restricted
                     </h4>
-                    <p className="text-xs font-mono-code text-[#999B96] max-w-md mb-5">
+                    <p className="text-xs font-mono-code text-[#999B96] max-w-md mb-5 leading-relaxed">
                       {project.title} enforces strict browser frame security policies (SAMEORIGIN). You can view the live site directly in a new tab:
                     </p>
                     <a
@@ -156,9 +157,9 @@ export default function ProjectModal({ project, onClose }) {
                 )}
               </div>
             ) : (
-              <div className="p-6 rounded-xl bg-[#07241B] border border-[#D6C29A]/20 flex flex-col sm:flex-row items-center justify-between gap-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 rounded-xl bg-[#101110] border border-[#D6C29A]/30 p-3 flex items-center justify-center shrink-0 shadow-lg">
+              <div className="p-4 sm:p-6 rounded-xl bg-[#07241B] border border-[#D6C29A]/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+                <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-[#101110] border border-[#D6C29A]/30 p-2 sm:p-3 flex items-center justify-center shrink-0 shadow-lg">
                     <img
                       src={project.favicon}
                       alt={project.title}
@@ -168,16 +169,16 @@ export default function ProjectModal({ project, onClose }) {
                       }}
                     />
                   </div>
-                  <div>
-                    <h3 className="font-editorial text-2xl font-bold text-[#F3F0E8]">
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-editorial text-lg sm:text-2xl font-bold text-[#F3F0E8] truncate">
                       {project.title}
                     </h3>
-                    <p className="text-xs font-mono-code text-[#D6C29A] mt-0.5">
+                    <p className="text-xs font-mono-code text-[#D6C29A] mt-0.5 line-clamp-1">
                       {project.tagline}
                     </p>
-                    <span className="text-xs font-mono-code text-[#999B96] flex items-center gap-1 mt-1">
-                      <Globe size={11} className="text-[#D6C29A]" />
-                      https://{project.domain}
+                    <span className="text-xs font-mono-code text-[#999B96] flex items-center gap-1 mt-1 truncate">
+                      <Globe size={11} className="text-[#D6C29A] shrink-0" />
+                      <span className="truncate">https://{project.domain}</span>
                     </span>
                   </div>
                 </div>
@@ -186,7 +187,7 @@ export default function ProjectModal({ project, onClose }) {
                   href={project.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-full bg-[#0B3D2E] text-[#D6C29A] font-mono-code text-xs uppercase tracking-wider font-semibold border border-[#D6C29A]/40 hover:bg-[#D6C29A] hover:text-[#101110] transition-all flex items-center gap-2 shrink-0 shadow-lg"
+                  className="w-full sm:w-auto justify-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-full bg-[#0B3D2E] text-[#D6C29A] font-mono-code text-xs uppercase tracking-wider font-semibold border border-[#D6C29A]/40 hover:bg-[#D6C29A] hover:text-[#101110] transition-all flex items-center gap-2 shrink-0 shadow-lg"
                   data-cursor="pointer"
                 >
                   <span>Visit Live Website</span>

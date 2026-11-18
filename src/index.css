@@ -16,17 +16,16 @@
     font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #101110;
     color: #F3F0E8;
-    overflow-x: hidden;
-    scroll-behavior: auto;
+    overflow-x: clip;
+    scroll-behavior: smooth;
   }
 
   body {
     background-color: #101110;
     color: #F3F0E8;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow-x: clip;
+    min-height: 100%;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
   }
 
   /* Custom luxury scrollbar */
@@ -61,10 +60,9 @@
 /* Subtle Film Grain Overlay */
 .grain-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 9999;
   opacity: 0.035;

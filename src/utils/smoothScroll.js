@@ -26,6 +26,9 @@ export function initSmoothScroll() {
       lenisInstance.destroy();
       lenisInstance = null;
     }
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.remove('lenis', 'lenis-stopped', 'lenis-smooth', 'lenis-scrolling');
+    }
     return null;
   }
 
@@ -61,18 +64,28 @@ export function initSmoothScroll() {
 }
 
 export function scrollToSection(targetId) {
+  if (!targetId || typeof window === 'undefined') return;
   const element = document.querySelector(targetId);
   if (!element) return;
 
   if (lenisInstance) {
     lenisInstance.scrollTo(element, {
-      offset: -40,
-      duration: 1.4,
+      offset: -70,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
     });
   } else {
-    // Native smooth scroll for mobile & touch devices
-    element.scrollIntoView({ behavior: 'smooth' });
+    // Universal robust native smooth scroll for mobile & touch devices with navbar offset
+    const navHeight = 70;
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = element.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = Math.max(0, elementPosition - navHeight);
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
   }
 }
 

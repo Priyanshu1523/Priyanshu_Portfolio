@@ -20,7 +20,7 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 40) {
+      if (window.scrollY > 30) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
@@ -33,7 +33,6 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
         if (el) {
           const rect = el.getBoundingClientRect();
           if (rect.top <= 250 && rect.bottom >= 250) {
-            // Map sub-sections to active nav item
             if (section === 'tech-stack') {
               setActiveSection('services');
             } else if (section === 'education' || section === 'workflow') {
@@ -51,11 +50,33 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll only while mobile navigation menu overlay is actively shown
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   const handleNavClick = (e, href) => {
     e.preventDefault();
     sounds.playClick();
-    scrollToSection(href);
-    setIsMobileMenuOpen(false);
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = '';
+      setIsMobileMenuOpen(false);
+      // Ensure mobile menu close is committed then scroll smoothly with navbar offset
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          scrollToSection(href);
+        }, 60);
+      });
+    } else {
+      scrollToSection(href);
+    }
   };
 
   const toggleSound = () => {
@@ -66,35 +87,35 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
           isScrolled
-            ? 'py-4 bg-[#101110]/85 backdrop-blur-md border-b border-[#D6C29A]/10 shadow-lg'
-            : 'py-6 md:py-8 bg-transparent'
+            ? 'py-3 sm:py-4 bg-[#101110]/90 backdrop-blur-md border-b border-[#D6C29A]/10 shadow-lg'
+            : 'py-5 sm:py-7 bg-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 flex items-center justify-between">
           {/* Brand Wordmark & Profile Thumbnail */}
           <a
             href="#hero"
             onClick={(e) => handleNavClick(e, '#hero')}
             onMouseEnter={() => sounds.playHover()}
-            className="group flex items-center gap-3"
+            className="group flex items-center gap-2.5 sm:gap-3"
             data-cursor="pointer"
           >
             <div className="w-8 h-8 rounded-full border border-[#D6C29A]/50 overflow-hidden bg-[#0B3D2E] group-hover:border-[#D6C29A] transition-colors shadow-sm shrink-0">
               <img src="/priyanshu-profile.jpg" alt="Priyanshu Chauhan" className="w-full h-full object-cover" />
             </div>
             <div className="flex flex-col">
-              <span className="font-editorial text-sm md:text-base font-bold tracking-wider text-[#F3F0E8] group-hover:text-[#D6C29A] transition-colors">
+              <span className="font-editorial text-sm sm:text-base font-bold tracking-wider text-[#F3F0E8] group-hover:text-[#D6C29A] transition-colors leading-tight">
                 PRIYANSHU CHAUHAN
               </span>
-              <span className="text-[10px] font-mono-code text-[#999B96] tracking-widest hidden sm:block">
+              <span className="text-[9px] sm:text-[10px] font-mono-code text-[#999B96] tracking-widest hidden xs:block">
                 SOFTWARE DEVELOPER
               </span>
             </div>
           </a>
 
-          {/* Desktop Center Navigation Links in Exact Order: About -> Works -> Services -> Experience -> Contact */}
+          {/* Desktop Center Navigation Links */}
           <nav className="hidden lg:flex items-center gap-8 bg-[#12291F]/40 border border-[#D6C29A]/15 px-6 py-2 rounded-full backdrop-blur-sm">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
@@ -123,12 +144,12 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             {/* Audio Toggle */}
             <button
               onClick={toggleSound}
               onMouseEnter={() => sounds.playHover()}
-              className="p-2.5 rounded-full border border-[#D6C29A]/20 bg-[#12291F]/30 hover:border-[#D6C29A] text-[#D6C29A] transition-all"
+              className="p-2 sm:p-2.5 rounded-full border border-[#D6C29A]/20 bg-[#12291F]/30 hover:border-[#D6C29A] text-[#D6C29A] transition-all"
               title={soundEnabled ? "Mute interactive audio" : "Enable tactile audio effects"}
               aria-label="Toggle Sound"
               data-cursor="pointer"
@@ -154,7 +175,7 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
                 sounds.playClick();
                 setIsMobileMenuOpen(!isMobileMenuOpen);
               }}
-              className="lg:hidden p-2.5 rounded-lg border border-[#D6C29A]/20 bg-[#12291F]/40 text-[#F3F0E8] hover:border-[#D6C29A] transition-colors"
+              className="lg:hidden p-2 sm:p-2.5 rounded-lg border border-[#D6C29A]/20 bg-[#12291F]/40 text-[#F3F0E8] hover:border-[#D6C29A] transition-colors"
               aria-label="Toggle Menu"
               data-cursor="pointer"
             >
@@ -171,25 +192,25 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
             initial={{ opacity: 0, y: '-100%' }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
-            transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-40 bg-[#101110] text-[#F3F0E8] flex flex-col justify-between p-8 pt-28 lg:hidden"
+            transition={{ duration: 0.35, ease: [0.76, 0, 0.24, 1] }}
+            className="fixed inset-0 z-40 bg-[#101110] text-[#F3F0E8] flex flex-col justify-between p-6 sm:p-8 pt-24 lg:hidden overflow-y-auto"
           >
-            <div className="flex flex-col gap-6 my-auto">
+            <div className="flex flex-col gap-5 my-auto">
               {navLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  initial={{ opacity: 0, x: -30 }}
+                  initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.08 * idx, duration: 0.4 }}
-                  className="group flex items-center justify-between text-3xl sm:text-4xl font-editorial font-bold text-[#F3F0E8] hover:text-[#D6C29A] transition-colors border-b border-[#D6C29A]/10 pb-3"
+                  transition={{ delay: 0.05 * idx, duration: 0.3 }}
+                  className="group flex items-center justify-between text-2xl sm:text-3xl font-editorial font-bold text-[#F3F0E8] hover:text-[#D6C29A] transition-colors border-b border-[#D6C29A]/10 pb-3"
                 >
                   <span className="flex items-center gap-3">
                     <span className="text-xs font-mono-code text-[#D6C29A] font-normal">0{idx + 1}</span>
                     {link.name}
                   </span>
-                  <ArrowUpRight size={24} className="text-[#999B96] group-hover:text-[#D6C29A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  <ArrowUpRight size={20} className="text-[#999B96] group-hover:text-[#D6C29A] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
                 </motion.a>
               ))}
             </div>
@@ -197,7 +218,7 @@ export default function Navbar({ soundEnabled, setSoundEnabled }) {
             <div className="pt-6 border-t border-[#D6C29A]/15 flex flex-col sm:flex-row justify-between gap-4 text-xs font-mono-code text-[#999B96]">
               <div>
                 <p className="text-[#D6C29A] font-semibold">DIRECT CONTACT</p>
-                <p>chauhanpriyanshu011@gmail.com</p>
+                <p className="break-all">chauhanpriyanshu011@gmail.com</p>
               </div>
               <div>
                 <p className="text-[#D6C29A] font-semibold">LOCATION</p>

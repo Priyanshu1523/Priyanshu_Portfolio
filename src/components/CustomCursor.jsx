@@ -9,7 +9,12 @@ export default function CustomCursor() {
 
   useEffect(() => {
     // Disable on touch devices or fine pointer absent
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    const isTouchInput = 
+      window.matchMedia('(pointer: coarse)').matches ||
+      'ontouchstart' in window ||
+      navigator.maxTouchPoints > 0;
+
+    if (isTouchInput) {
       setIsTouch(true);
       return;
     }

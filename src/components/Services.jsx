@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, ArrowUpRight, CheckCircle2, Sparkles, Terminal } from 'lucide-react';
 import { SERVICES } from '../data/portfolioData';
+import { scrollToSection } from '../utils/smoothScroll';
 import { sounds } from '../utils/audio';
 
 export default function Services() {
@@ -13,14 +14,14 @@ export default function Services() {
   };
 
   return (
-    <section id="services" className="relative py-24 md:py-36 px-6 md:px-12 bg-[#101110] text-[#F3F0E8] overflow-hidden">
+    <section id="services" className="relative py-20 sm:py-28 md:py-36 px-4 sm:px-6 md:px-12 bg-[#101110] text-[#F3F0E8] overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute bottom-10 left-10 w-96 h-96 bg-[#0B3D2E]/20 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
         {/* Section Index Header */}
-        <div className="flex items-center gap-4 mb-8 md:mb-12">
-          <span className="font-mono-code text-xs uppercase tracking-[0.3em] text-[#D6C29A]">
+        <div className="flex items-center gap-4 mb-6 sm:mb-10">
+          <span className="font-mono-code text-[11px] sm:text-xs uppercase tracking-[0.3em] text-[#D6C29A]">
             03 &bull; CORE CAPABILITIES
           </span>
           <div className="h-px flex-1 bg-[#D6C29A]/15" />
@@ -57,21 +58,21 @@ export default function Services() {
                 {/* Clickable Header Row */}
                 <div
                   onClick={() => handleToggle(service.id)}
-                  className="py-8 md:py-10 flex items-center justify-between cursor-pointer group"
+                  className="py-6 sm:py-8 md:py-10 flex items-center justify-between cursor-pointer group"
                   data-cursor="pointer"
                 >
-                  <div className="flex items-center gap-6 md:gap-12 flex-1 pr-4">
+                  <div className="flex items-center gap-4 sm:gap-6 md:gap-12 flex-1 pr-3 sm:pr-4">
                     {/* Number */}
-                    <span className="font-mono-code text-lg sm:text-2xl font-light text-[#D6C29A] tracking-widest shrink-0">
+                    <span className="font-mono-code text-base sm:text-2xl font-light text-[#D6C29A] tracking-widest shrink-0">
                       {service.id}
                     </span>
 
                     {/* Title */}
                     <div className="flex-1">
-                      <h3 className="font-editorial text-2xl sm:text-4xl md:text-5xl font-bold text-[#F3F0E8] group-hover:text-[#D6C29A] transition-colors">
+                      <h3 className="font-editorial text-lg sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#F3F0E8] group-hover:text-[#D6C29A] transition-colors leading-tight">
                         {service.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-[#999B96] font-mono-code mt-2 line-clamp-1 hidden sm:block">
+                      <p className="text-xs sm:text-sm text-[#999B96] font-mono-code mt-1 sm:mt-2 line-clamp-1 hidden sm:block">
                         {service.subtitle}
                       </p>
                     </div>
@@ -82,8 +83,8 @@ export default function Services() {
                     <span className="hidden md:inline-block text-xs font-mono-code text-[#999B96] uppercase tracking-wider group-hover:text-[#D6C29A] transition-colors">
                       {isOpen ? 'Close' : 'Explore'}
                     </span>
-                    <div className="w-10 h-10 rounded-full border border-[#D6C29A]/30 flex items-center justify-center bg-[#101110] text-[#D6C29A] group-hover:border-[#D6C29A] transition-all">
-                      {isOpen ? <Minus size={16} /> : <Plus size={16} />}
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#D6C29A]/30 flex items-center justify-center bg-[#101110] text-[#D6C29A] group-hover:border-[#D6C29A] transition-all">
+                      {isOpen ? <Minus size={15} /> : <Plus size={15} />}
                     </div>
                   </div>
                 </div>
@@ -123,6 +124,11 @@ export default function Services() {
 
                           <a
                             href="#contact"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              sounds.playClick();
+                              scrollToSection('#contact');
+                            }}
                             className="inline-flex items-center gap-2 text-xs font-mono-code uppercase tracking-wider text-[#D6C29A] hover:text-[#F3F0E8] font-semibold pt-2"
                             data-cursor="pointer"
                           >
