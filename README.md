@@ -12,6 +12,8 @@ An interactive, motion-rich portfolio for a Full-Stack & ERP (Odoo / ERPNext) de
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-11-0055FF?logo=framer&logoColor=white)
 ![Deployed on Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?logo=vercel&logoColor=white)
 
+### [🌐 View Live Portfolio](https://priyanshu-chauhan.vercel.app/)
+
 </div>
 
 ---
@@ -195,6 +197,8 @@ The project is configured for [Vercel](https://vercel.com/) via `vercel.json`:
 - SPA rewrite to `index.html`
 - Long-term caching for `/assets/*`
 
+**Live site:** [priyanshu-chauhan.vercel.app](https://priyanshu-chauhan.vercel.app/)
+
 To deploy, import the GitHub repository in Vercel and keep the defaults. Every push to `main` redeploys automatically.
 
 ---
@@ -203,6 +207,7 @@ To deploy, import the GitHub repository in Vercel and keep the defaults. Every p
 
 **Priyanshu Chauhan** — Software Developer, Gujarat, India
 
+- Portfolio: [priyanshu-chauhan.vercel.app](https://priyanshu-chauhan.vercel.app/)
 - Email: [chauhanpriyanshu011@gmail.com](mailto:chauhanpriyanshu011@gmail.com)
 - LinkedIn: [priyanshu-chauhan](https://www.linkedin.com/in/priyanshu-chauhan-54110a227/)
 
