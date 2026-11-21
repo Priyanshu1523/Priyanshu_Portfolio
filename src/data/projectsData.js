@@ -49,26 +49,6 @@ export const PROJECTS = [
     status: "Active Ongoing AMC"
   },
   {
-    id: "government-arts-college-maninagar",
-    title: "Government Arts College, Maninagar",
-    tagline: "Official Institutional Portal & Academic Maintenance Contract",
-    shortDescription: "Managed the 2-year AMC for Government Arts College, Maninagar, delivering regular notices, admissions announcements, hosting support, and swift security resolution.",
-    fullDescription: "Handled the website AMC for Government Arts College, Maninagar, for 2 years. The college offers quality Arts-stream education in the area. My work covered regular content updates (notices, admissions, events), maintenance, security, hosting support, and prompt issue resolution.",
-    url: "https://www.gacmaninagar.com",
-    duration: "2 years",
-    tags: ["AMC", "Maintenance", "Education", "Hosting Support"],
-    domain: "gacmaninagar.com",
-    favicon: "https://www.google.com/s2/favicons?domain=gacmaninagar.com&sz=128",
-    highlights: [
-      "2 full years of dedicated AMC and technical hosting management",
-      "Timely publication of government notices, exam schedules, and circulars",
-      "Server uptime maintenance, malware prevention, and security hardening",
-      "Rapid resolution of academic queries and departmental updates"
-    ],
-    role: "Web Administrator & AMC Specialist",
-    status: "Completed (2 Years)"
-  },
-  {
     id: "swaminarayan-university-kalol",
     title: "Swaminarayan University, Kalol",
     tagline: "Higher Education Web Portal & Enterprise Performance AMC",
